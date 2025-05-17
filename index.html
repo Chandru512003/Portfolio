@@ -4,138 +4,250 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Chandru A | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter :wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    /* Base Styles */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+    :root {
+      --bg: #f9fafb;
+      --text: #333;
+      --card-bg: white;
+      --accent: #2563eb;
+    }
 
-body {
-  font-family: 'Segoe UI', sans-serif;
-  line-height: 1.6;
-  background: #f4f4f4;
-  color: #333;
-}
+    .dark {
+      --bg: #111827;
+      --text: #f9fafb;
+      --card-bg: #1f2937;
+      --accent: #60a5fa;
+    }
 
-/* Container */
-.container {
-  width: 90%;
-  max-width: 960px;
-  margin: auto;
-  padding: 20px 0;
-}
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
 
-/* Header */
-header {
-  background: #1e293b;
-  color: #fff;
-  padding: 40px 0 20px;
-  text-align: center;
-}
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
 
-header h1 {
-  margin-bottom: 10px;
-  font-size: 2.5em;
-}
+    a:hover {
+      text-decoration: underline;
+    }
 
-header p {
-  font-size: 1.2em;
-  color: #cbd5e1;
-}
+    h2, h3 {
+      color: var(--text);
+    }
+    h1{
+        color:#f9fafb
+    }
 
-nav a {
-  color: #fff;
-  margin: 0 15px;
-  text-decoration: none;
-  font-weight: bold;
-}
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px 0;
+    }
 
-nav a:hover {
-  text-decoration: underline;
-}
+    header {
+      background: linear-gradient(to right, #1e293b, #334155);
+      color: white;
+      padding: 50px 0 30px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
 
-/* Sections */
-section {
-  padding: 40px 0;
-}
+    header h1 {
+      font-size: 3em;
+    }
 
-h2 {
-  font-size: 2em;
-  margin-bottom: 20px;
-  color: #0f172a;
-}
+    header p {
+      font-size: 1.2em;
+      color: #cbd5e1;
+    }
 
-/* Projects */
-.project {
-  background: #fff;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-left: 5px solid #1d4ed8;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
+    nav {
+      margin-top: 15px;
+    }
 
-.project h3 {
-  margin-bottom: 10px;
-  color: #1e40af;
-}
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity 0.3s ease;
+    }
 
-.project a {
-  color: #2563eb;
-  text-decoration: none;
-}
+    nav a:hover {
+      opacity: 0.8;
+    }
 
-.project a:hover {
-  text-decoration: underline;
-}
+    section {
+      padding: 60px 0;
+    }
 
-/* Skills */
-.skills ul {
-  list-style: disc;
-  padding-left: 20px;
-}
+    h2 {
+      font-size: 2.2em;
+      margin-bottom: 20px;
+    }
 
-.skills li {
-  margin-bottom: 10px;
-}
+    /* Fade-in animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out;
+    }
 
-/* Contact */
-.contact a {
-  color: #1e40af;
-  text-decoration: none;
-}
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-.contact a:hover {
-  text-decoration: underline;
-}
+    /* Projects */
+    .project-card {
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
 
-.resume-btn {
-  color: #fff;
-  display: inline-block;
-  margin-top: 15px;
-  padding: 10px 20px;
-  background-color: #1d4ed8;
-  text-decoration: none;
-  border-radius: 5px;
-}
+    .project-card:hover {
+      transform: translateY(-5px);
+    }
 
-.resume-btn:hover {
-  background: #2563eb;
-}
+    .project-card h3 {
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
 
-/* Footer */
-footer {
-  background: #1e293b;
-  color: #fff;
-  text-align: center;
-  padding: 20px 0;
-  margin-top: 40px;
-}
+    /* Modal */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      visibility: hidden;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
 
+    .modal.active {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .modal-content {
+      background: var(--card-bg);
+      color: var(--text);
+      padding: 30px;
+      border-radius: 10px;
+      position: relative;
+      max-width: 600px;
+      width: 90%;
+    }
+
+    .modal-content h3 {
+      margin-bottom: 15px;
+      color: var(--accent);
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* Skills */
+    ul {
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    /* Resume Button */
+    .resume-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #1d4ed8, #2563eb);
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .resume-btn:hover {
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      transform: scale(1.05);
+    }
+
+    /* Footer */
+    footer {
+      background: #1e293b;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 40px;
+    }
+
+    /* Dark Mode Toggle */
+    #darkModeToggle {
+      margin-top: 15px;
+      padding: 8px 12px;
+      background: white;
+      color: #1e293b;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    #darkModeToggle:hover {
+      background: #f1f5f9;
+    }
+
+    /* Social Icons */
+    .social-icons {
+      margin-top: 20px;
+    }
+
+    .social-icons a {
+      margin-right: 15px;
+      font-size: 16px;
+      vertical-align: middle;
+      color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2em;
+      }
+      h2 {
+        font-size: 1.8em;
+      }
+    }
   </style>
 </head>
-<body>
+<body class="dark"> <!-- DEFAULT DARK MODE -->
+
+  <!-- Header -->
   <header>
     <div class="container">
       <h1>Chandru A</h1>
@@ -145,66 +257,151 @@ footer {
         <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
       </nav>
+      <button id="darkModeToggle">☀️ Light Mode</button>
     </div>
   </header>
 
-  <section class="intro">
-    <div class="container">
-      <h2>About Me</h2>
-      <p>Recent BE CSE graduate from GCT Coimbatore with hands-on experience in full-stack web development, data processing, and backend systems. I thrive in team-based environments and have a passion for solving real-world problems through technology.</p>
-    </div>
+  <!-- About Section -->
+  <section class="intro fade-in container">
+    <h2>About Me</h2>
+    <p>
+      Recent BE CSE graduate from GCT Coimbatore with hands-on experience in full-stack web development, data processing, and backend systems.
+      I thrive in team-based environments and have a passion for solving real-world problems through technology.
+    </p>
   </section>
 
-  <section id="projects" class="projects">
+  <!-- Projects Section -->
+  <section id="projects" class="projects fade-in">
     <div class="container">
       <h2>Projects</h2>
-
-      <div class="project">
+      <div class="project-card" onclick="openModal('modal1')">
         <h3>AI Powered Project Management</h3>
-        <p>Built a project management assistant using Gemini AI with Flask backend. Included role-based access, secure authentication, and natural language task queries.</p>
-        <a href="https://github.com/Chandru512003/Project-Management-App.git" target="_blank">GitHub Repo</a>
-        <a href="https://project-management-assistant-gemmo.onrender.com" target="_blank">Live Demo</a>
+        <p>Built a project management assistant using Gemini AI with Flask backend.</p>
+        <span class="text-blue-600 block mt-2 underline">View Details</span>
       </div>
-
-      <div class="project">
+      <div class="project-card" onclick="openModal('modal2')">
         <h3>Expense Tracker with ML</h3>
-        <p>Developed a chatbot-integrated expense tracker with income/expense updates, linear regression prediction, and real-time dashboard using Excel and JavaScript.</p>
-        <a href="https://github.com/Chandru512003/Expense-Tracker-Using-Linear-Regression" target="_blank">GitHub Repo</a>
+        <p>Chatbot-integrated expense tracker with income tracking and ML predictions.</p>
+        <span class="text-blue-600 block mt-2 underline">View Details</span>
       </div>
-
-      <div class="project">
+      <div class="project-card" onclick="openModal('modal3')">
         <h3>Hotel Management System</h3>
-        <p>A complete hotel management platform for room booking, availability tracking, checkouts, and responsive UI using HTML, CSS, JS.</p>
-        <a href="https://github.com/Chandru512003/Hotel_Magagement.git" target="_blank">GitHub Repo</a>
+        <p>A complete hotel booking and management platform built with HTML/CSS/JS.</p>
+        <span class="text-blue-600 block mt-2 underline">View Details</span>
       </div>
     </div>
   </section>
 
-  <section id="skills" class="skills">
-    <div class="container">
-      <h2>Skills</h2>
-      <ul>
-        <li><strong>Languages:</strong> Python, Java, C, JavaScript, HTML, CSS, PHP, SQL</li>
-        <li><strong>Web Tech:</strong> Flask, REST APIs, AJAX, Responsive Design</li>
-        <li><strong>Tools:</strong> Git, GitHub, VS Code, Wireshark, Excel</li>
-      </ul>
-    </div>
+  <!-- Skills Section -->
+  <section id="skills" class="skills fade-in container">
+    <h2>Skills</h2>
+    <ul>
+      <li><strong>Languages:</strong> Python, Java, C, JavaScript, HTML, CSS, PHP, SQL</li>
+      <li><strong>Web Tech:</strong> Flask, REST APIs, AJAX, Responsive Design</li>
+      <li><strong>Tools:</strong> Git, GitHub, VS Code, Wireshark, Excel</li>
+    </ul>
   </section>
 
-  <section id="contact" class="contact">
+  <!-- Contact Section -->
+  <section id="contact" class="contact fade-in">
     <div class="container">
       <h2>Contact</h2>
       <p><strong>Email:</strong> <a href="mailto:chandrua2577@gmail.com">chandrua2577@gmail.com</a></p>
-      <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/chandru-a-2bb761285" target="_blank">linkedin.com/in/chandru-a</a></p>
-      <p><strong>GitHub:</strong> <a href="https://github.com/Chandru512003" target="_blank">github.com/Chandru512003</a></p>
-      <a class="resume-btn" href="https://drive.google.com/file/d/1H9V_WLGpUM9AcmujWT7PiOD2b1DGc0tX/view?usp=drivesdk" download>Download Resume</a>
+      <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/chandru-a-2bb761285 " target="_blank">linkedin.com/in/chandru-a</a></p>
+      <p><strong>GitHub:</strong> <a href="https://github.com/Chandru512003 " target="_blank">github.com/Chandru512003</a></p>
+      <a class="resume-btn" href="https://drive.google.com/file/d/1H9V_WLGpUM9AcmujWT7PiOD2b1DGc0tX/view?usp=drivesdk " download>Download Resume</a>
+
+      <!-- Social Icons -->
+      <div class="social-icons">
+        <a href="https://github.com/Chandru512003 " target="_blank">📁 GitHub</a>
+        <a href="https://linkedin.com/in/chandru-a-2bb761285 " target="_blank">🔗 LinkedIn</a>
+      </div>
     </div>
   </section>
 
+  <!-- Footer -->
   <footer>
     <div class="container">
       <p>&copy; 2025 Chandru A</p>
     </div>
   </footer>
+
+  <!-- Modals -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal('modal1')">&times;</span>
+      <h3>AI Powered Project Management</h3>
+      <p>Built a project management assistant using Gemini AI with Flask backend. Included role-based access, secure authentication, and natural language task queries.</p>
+      <a href="https://github.com/Chandru512003/Project-Management-App.git " target="_blank">GitHub Repo</a>
+      <a href="https://project-management-assistant-gemmo.onrender.com " target="_blank">Live Demo</a>
+    </div>
+  </div>
+
+  <div id="modal2" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal('modal2')">&times;</span>
+      <h3>Expense Tracker with ML</h3>
+      <p>Developed a chatbot-integrated expense tracker with income/expense updates, linear regression prediction, and real-time dashboard using Excel and JavaScript.</p>
+      <a href="https://github.com/Chandru512003/Expense-Tracker-Using-Linear-Regression " target="_blank">GitHub Repo</a>
+    </div>
+  </div>
+
+  <div id="modal3" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal('modal3')">&times;</span>
+      <h3>Hotel Management System</h3>
+      <p>A complete hotel management platform for room booking, availability tracking, checkouts, and responsive UI using HTML, CSS, JS.</p>
+      <a href="https://github.com/Chandru512003/Hotel_Magagement.git " target="_blank">GitHub Repo</a>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // Scroll animations
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOnScroll = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.2 });
+
+    faders.forEach(fader => {
+      appearOnScroll.observe(fader);
+    });
+
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const body = document.body;
+
+    // Start in dark mode
+    darkModeToggle.textContent = "☀️ Light Mode";
+
+    darkModeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark');
+      darkModeToggle.textContent = body.classList.contains('dark') ? '☀️ Light Mode' : '🌙 Dark Mode';
+    });
+
+    // Modal functions
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      const modals = document.querySelectorAll('.modal');
+      modals.forEach(modal => {
+        if (event.target === modal) {
+          modal.classList.remove('active');
+        }
+      });
+    };
+  </script>
+
 </body>
 </html>
